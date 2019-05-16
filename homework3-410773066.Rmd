@@ -75,12 +75,12 @@ loss2Companies
 
 ```{r ans13}
 # only1LossCompanies
-log3 <-  finStatement[[16]] >= 0
+log3 <-  (finStatement[[16]] >= 0 ) & (finStatement[[33]] <= 0)
 loss3Companies <- c(finStatement$公司名稱[log3])
-log4 <- finStatement[[33]] >= 0
+log4 <- (finStatement[[33]] >= 0) & (finStatement[[16]]<= 0)
 loss4Companies <- c(finStatement$公司名稱[log4])
-
-
+only1LossCompanies <- c(loss3Companies,loss4Companies)
+only1LossCompanies
 ```
 
 
@@ -89,6 +89,10 @@ loss4Companies <- c(finStatement$公司名稱[log4])
 本題物件為data frame class，使用`[.R,.C]`選出符合上題條件的子樣本，存成data frame class的答案物件subsample。
 ```{r ans14}
 # subsample
+subsample <- data.frame(
+    有營業利益卻出現每股盈餘損失或有營業損失卻出現每股盈餘獲利 = c(only1LossCompanies)
+)
+subsample
 ```
 
 ## 2 展覽資訊
