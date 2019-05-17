@@ -135,6 +135,7 @@ df_oneShow <- data.frame(
       locationName =c(exhibitionList[[1]][[5]][[1]][[3]]),
       price =c(exhibitionList[[1]][[5]][[1]][[5]]),
       endTime =c(exhibitionList[[1]][[5]][[1]][[8]]),
+      sourceWebName =c(exhibitionList[[1]][[18]]),
       stringsAsFactors = FALSE
 ) 
 df_oneShow
@@ -162,7 +163,9 @@ df_oneShow <- data.frame(
       location =c(exhibitionInput[[5]][[1]][[2]]),
       locationName =c(exhibitionInput[[5]][[1]][[3]]),
       price =c(exhibitionInput[[5]][[1]][[5]]),
-      endTime =c(exhibitionInput[[5]][[1]][[8]])
+      endTime =c(exhibitionInput[[5]][[1]][[8]]),
+      sourceWebName =c(exhibitionInput[[18]]),
+      stringsAsFactors = FALSE
 ) 
 
 return(df_oneShow)
@@ -182,7 +185,8 @@ map_dfr(exhibitionList,dataframe_show_info) -> df_allShows
 
 ```{r ans24}
 # levels(df_allShows$sourceWebName)
-
+factor(df_allShows$sourceWebName) -> df_allShows$sourceWebName
+levels(df_allShows$sourceWebName)
 ```
 
 ### 2.5 計算單一來源
@@ -190,6 +194,9 @@ map_dfr(exhibitionList,dataframe_show_info) -> df_allShows
 
 ```{r ans25}
 # totalCount
+as.factor(df_allShows$sourceWebName) == c("全國藝文活動資訊系統") -> nu
+sum(as.integer(nu)) -> totalCount
+totalCount
 ```
 
 
